@@ -39,14 +39,17 @@ body {
   font-weight: 600;
 }
 
-main {
-  margin: 2rem auto;
-  width: 92%;
-}
-
 .form__filter-container, .form__search-container {
   position: relative;
   margin: 2rem 0;
+}
+.form__search-container {
+  width: 100%;
+  max-width: 395px;
+}
+.formfilter-container {
+  width: 100%;
+  max-width: 210px;
 }
 .form__search {
   width: 100%;
@@ -60,9 +63,6 @@ main {
   font-weight: 600;
   border: none;
 }
-.form__search:focus {
-  border: none;
-}
 .form__search-icon {
   position: absolute;
   transform: translateY(50%);
@@ -70,7 +70,7 @@ main {
   color: hsl(0deg, 0%, 52%);
 }
 .form__filter {
-  width: 60%;
+  min-width: 210px;
   height: 3rem;
   padding-left: 2rem;
   font-size: 1rem;
@@ -89,9 +89,72 @@ main {
   position: absolute;
 }
 
+.cards-grid,
+.form {
+  margin: 2rem auto;
+  width: 92%;
+}
+
 .cards-grid {
-  width: 85%;
-  margin: 0 auto;
-  height: 100vh;
-  background: aquamarine;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 3rem;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  max-width: 260px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.card__flag-container {
+  width: 100%;
+}
+.card__flag-img {
+  width: 100%;
+  height: 170px;
+  border-radius: 10px 10px 0 0;
+}
+.card__about {
+  margin: 2rem;
+}
+.card__title {
+  margin: 0.5rem 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.card__info--bold {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 700px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 1023px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+@media screen and (min-width: 1430px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+@media screen and (min-width: 2400px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
 }/*# sourceMappingURL=style.css.map */
