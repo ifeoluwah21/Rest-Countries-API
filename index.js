@@ -2,7 +2,8 @@ const searchQuery = document.querySelector(`#search`);
 const filterQuery = document.querySelector(`#filter`);
 const cardGrid = document.querySelector(`.cards-grid`);
 const form = document.querySelector(`form`);
-
+const detailsPage = document.querySelector(`.detail-card`);
+const backBtn = document.querySelector(`.detail-card__back-btn`)
 
 
 const eventListenerFnstore = {
@@ -19,6 +20,12 @@ const eventListenerFnstore = {
         if (key === 13) {
             e.preventDefault();
         }
+    },
+    showDetailsPage(e) {
+        detailsPage.classList.add(`show`);
+    },
+    hideDetailsPage(e) {
+        detailsPage.classList.remove(`show`);
     }
 }
 //FetchAll countries
@@ -85,6 +92,7 @@ function createCard(details) {
 
         div.addEventListener(`click`, (e) => {
             loadedDetailCard(detail);
+            eventListenerFnstore.showDetailsPage();
         })
         cardGrid.appendChild(div);
 
@@ -97,7 +105,7 @@ searchQuery.addEventListener(`change`, eventListenerFnstore.getByQuery)
 filterQuery.addEventListener(`change`, eventListenerFnstore.getByQuery)
 
 form.addEventListener(`keypress`, eventListenerFnstore.preventFormDefault)
-
+backBtn.addEventListener(`click`, eventListenerFnstore.hideDetailsPage)
 
 function loadedDetailCard(detail) {
     //Getting the detail page

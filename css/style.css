@@ -152,6 +152,9 @@ body {
   transition: margin 1s ease;
   margin-left: -100%;
 }
+.detail-card.show {
+  margin-left: 0;
+}
 .detail-card__top-info > p, .detail-card__mid-info > p {
   padding: 0.5rem 0;
 }
