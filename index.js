@@ -4,11 +4,13 @@ const cardGrid = document.querySelector(`.cards-grid`);
 const form = document.querySelector(`form`);
 const detailsPage = document.querySelector(`.detail-card`);
 const backBtn = document.querySelector(`.detail-card__back-btn`)
+const borderBox = document.querySelector(`.detail-card__less-container`);
 
 
+let all;
 const eventListenerFnstore = {
     getAll() {
-        return fetchAll();
+        return fetchAll().then(data => all = data);
     },
     getByQuery(e) {
         e.preventDefault();
@@ -46,9 +48,10 @@ async function fetchAll() {
 //Search query fetch
 async function fetchByQuery(type, query) {
     try {
-        let res;
+        let res, all;
         if (type === `search`) {
             res = await fetch(`https://restcountries.com/v3.1/name/${query}`);
+
         }
         if (type === `filter`) {
             res = await fetch(`https://restcountries.com/v3.1/region/${query}`);
@@ -76,7 +79,9 @@ function errorMessage(err) {
 }
 
 function createCard(details) {
+
     let someDetails = details.length > 40 ? details.slice(0, 40) : details;
+
     someDetails.forEach((detail) => {
         let div = document.createElement(`div`);
         div.classList.add(`card`)
@@ -107,6 +112,7 @@ filterQuery.addEventListener(`change`, eventListenerFnstore.getByQuery)
 form.addEventListener(`keypress`, eventListenerFnstore.preventFormDefault)
 backBtn.addEventListener(`click`, eventListenerFnstore.hideDetailsPage)
 
+
 function loadedDetailCard(detail) {
     //Getting the detail page
     const detailCard = document.querySelector(`.detail-card`);
@@ -127,7 +133,6 @@ function loadedDetailCard(detail) {
     let langs = helperFnStore.valuesFromObj(detail.languages)
 
 
-    console.log(detail)
     detailCardImg.setAttribute(`src`, detail.flags.png)
     detailCardTitle.innerHTML = detail.name.common;
     detailCardName.innerHTML = names.length > 1 ? names.join(`, `) : names.length === 1 ? names[0] : '';
@@ -138,8 +143,23 @@ function loadedDetailCard(detail) {
     detailCardCapital.innerHTML = detail.capital[0]
     detailCardCur.innerHTML = currencies.length > 1 ? currencies.join(`, `) : currencies.length === 1 ? currencies[0] : '';
     detailCardLang.innerHTML = langs.length > 1 ? langs.join(`, `) : langs.length === 1 ? langs[0] : '';
-}
 
+
+    //Setting border countries
+    //let borderCountries = helperFnStore.getBorderQuery(details, detail.borders);
+    let borderCountries = helperFnStore.getBorderQuery(all, detail.borders);
+    borderCountries.forEach(country => {
+        helperFnStore.borderCountries(country, borderBox)
+    })
+
+}
+function c(i, body) {
+    let div = document.createElement(`div`);
+    div.classList.add(`detail-card__less-item`);
+    div.innerHTML = `<p>${i.name.common}</p>`;
+    body.appendChild(div)
+
+}
 const helperFnStore = {
     valuesFromObj(obj, key) {
         let arrValues = [];
@@ -151,5 +171,19 @@ const helperFnStore = {
             }
         }
         return arrValues;
+    },
+    getBorderQuery(all, list) {
+        let result = all.filter((d, i, a) => {
+            return list?.includes(d.cca3);
+        })
+        return result
+    },
+    borderCountries(i, body) {
+        let div = document.createElement(`div`);
+        div.classList.add(`detail-card__less-item`);
+        if (i && i.name) {
+            div.innerHTML = `<p>${i?.name?.common}</p>`;
+        }
+        body.appendChild(div)
     }
 }
