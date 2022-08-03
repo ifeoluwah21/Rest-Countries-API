@@ -10,6 +10,7 @@ body {
   width: 100%;
   background-color: hsl(0, 0%, 95%);
   font-family: "Nunito Sans", sans-serif;
+  position: relative;
 }
 
 .header {
@@ -17,6 +18,7 @@ body {
   position: sticky;
   top: 0;
   margin: 0 auto;
+  z-index: 4;
   padding: 1.5rem 0;
   background-color: #ffffff;
   box-shadow: 0 1px 5px 2px grey;
@@ -147,6 +149,65 @@ body {
   &__info {
     &--bold {
       font-family: "Nunito Sans", sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.detail-card {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow-y: scroll;
+  background-color: hsl(0deg, 0%, 95%);
+  z-index: 2;
+  padding-top: 7rem;
+  transition: margin 1s ease;
+  margin-left: -100%;
+
+  &.show {
+    margin-left: 0;
+  }
+  &__top-info > p,
+  &__mid-info > p {
+    padding: 0.5rem 0;
+  }
+
+  &__img-container,
+  &__img {
+    width: 100%;
+  }
+
+  &__top-info,
+  &__mid-info,
+  &__less-info {
+    margin: 1rem 0;
+  }
+
+  &__hero-img,
+  &__about,
+  &__btn-container {
+    width: 80%;
+    margin: 1.5rem auto;
+  }
+
+  &__back-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 5px 2px rgb(145, 145, 145);
+
+    & > i {
+      font-size: 1.1rem;
+    }
+
+    & > span {
+      padding-left: 0.5rem;
       font-size: 1rem;
       font-weight: 600;
     }
