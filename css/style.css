@@ -160,6 +160,8 @@ body {
 }
 .detail-card__img-container, .detail-card__img {
   width: 100%;
+  max-width: 340px;
+  height: 100%;
 }
 .detail-card__top-info, .detail-card__mid-info, .detail-card__less-info {
   margin: 1rem 0;

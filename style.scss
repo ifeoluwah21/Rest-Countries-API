@@ -180,6 +180,8 @@ body {
   &__img-container,
   &__img {
     width: 100%;
+    max-width: 340px;
+    height: 100%;
   }
 
   &__top-info,
