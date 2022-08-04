@@ -17,8 +17,12 @@ const eventListenerFnstore = {
     getByQuery(e) {
         e.preventDefault();
         cardGrid.innerHTML = ``;
-        fetchByQuery(e.target.id, e.target.value)
+        if (e.target.name === `filter`) {
+            return fetchByQuery(e.target.name, e.target.value)
+        }
+        return fetchByQuery(`search`, searchQuery.value)
     },
+
     preventFormDefault(e) {
         let key = e.charCode || e.keyCode || 0;
         if (key === 13) {
@@ -63,6 +67,7 @@ async function fetchByQuery(type, query) {
             errorMessage(`No country is found based of your query`);
             throw Error(`No country is found based of your query`);
         }
+        cardGrid.innerHTML = ``;
         createCard(details);
         return details
     } catch (err) {
@@ -111,10 +116,9 @@ function createCard(details) {
 
 
 window.addEventListener(`DOMContentLoaded`, eventListenerFnstore.getAll)
-searchQuery.addEventListener(`change`, eventListenerFnstore.getByQuery)
 filterQuery.addEventListener(`change`, eventListenerFnstore.getByQuery)
 
-form.addEventListener(`keypress`, eventListenerFnstore.preventFormDefault)
+form.addEventListener(`submit`, eventListenerFnstore.getByQuery);
 backBtn.addEventListener(`click`, eventListenerFnstore.hideDetailsPage)
 
 

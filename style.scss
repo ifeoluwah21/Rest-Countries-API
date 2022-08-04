@@ -93,6 +93,7 @@ h3 {
     font-family: "Nunito Sans", sans-serif;
     font-weight: 600;
     border: none;
+    background-color: hsl(0, 0%, 100%);
     transition: background-color 0.5s, color 0.5s, ease;
     &--dark {
       background-color: hsl(209, 23%, 22%);
@@ -267,7 +268,6 @@ h3 {
 
   &__less-container {
     display: flex;
-    justify-content: space-between;
     flex-flow: row wrap;
     margin: 1rem 0;
     gap: 1.5rem 1rem;
