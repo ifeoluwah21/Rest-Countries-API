@@ -143,7 +143,8 @@ function loadedDetailCard(detail) {
     let langs = helperFnStore.valuesFromObj(detail.languages)
 
 
-    detailCardImg.setAttribute(`src`, detail.flags.png)
+    detailCardImg.setAttribute(`src`, detail.flags.png);
+    detailCardImg.setAttribute(`alt`, detail.name.official);
     detailCardTitle.innerHTML = detail.name.common;
     detailCardName.innerHTML = names.length > 1 ? names.join(`, `) : names.length === 1 ? names[0] : '';
     detailCardTld.innerHTML = detail.tld.length > 1 ? detail.tld.join(`, `) : detail.tld.length === 1 ? detail.tld[0] : '';
