@@ -117,6 +117,7 @@ h3 {
   font-size: 1rem;
   border-radius: 10px;
   font-weight: 600;
+  background-color: hsl(0deg, 0%, 100%);
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;

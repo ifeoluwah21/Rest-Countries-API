@@ -119,6 +119,7 @@ window.addEventListener(`DOMContentLoaded`, eventListenerFnstore.getAll)
 filterQuery.addEventListener(`change`, eventListenerFnstore.getByQuery)
 
 form.addEventListener(`submit`, eventListenerFnstore.getByQuery);
+searchQuery.addEventListener(`blur`, eventListenerFnstore.getByQuery);
 backBtn.addEventListener(`click`, eventListenerFnstore.hideDetailsPage)
 
 
