@@ -5,11 +5,16 @@
   box-sizing: border-box;
 }
 
-body {
+.body {
   width: 100%;
   background-color: hsl(0deg, 0%, 95%);
   font-family: "Nunito Sans", sans-serif;
   position: relative;
+  transition: background-color 0.5s, color 0.5s ease;
+}
+.body.body--dark {
+  background-color: hsl(207deg, 26%, 17%);
+  color: hsl(0deg, 0%, 100%);
 }
 
 h1,
@@ -28,6 +33,11 @@ h3 {
   padding: 1.5rem 0;
   background-color: #ffffff;
   box-shadow: 0 1px 5px 2px grey;
+  transition: background-color 0.5s, color 0.5s, box-shadow 0.2s ease;
+}
+.header--dark {
+  background-color: hsl(209deg, 23%, 22%);
+  box-shadow: none;
 }
 .header__container {
   width: 92%;
@@ -73,12 +83,30 @@ h3 {
   font-family: "Nunito Sans", sans-serif;
   font-weight: 600;
   border: none;
+  transition: background-color 0.5s, color 0.5s, ease;
+}
+.form__search--dark {
+  background-color: hsl(209deg, 23%, 22%);
+  color: hsl(0deg, 0%, 100%);
+}
+.form__search--dark::-moz-placeholder {
+  color: hsl(0deg, 0%, 100%);
+}
+.form__search--dark:-ms-input-placeholder {
+  color: hsl(0deg, 0%, 100%);
+}
+.form__search--dark::placeholder {
+  color: hsl(0deg, 0%, 100%);
 }
 .form__search-icon {
   position: absolute;
   transform: translateY(50%);
   padding-left: 30px;
   color: hsl(0deg, 0%, 52%);
+  transition: background-color 0.5s, color 0.5s ease;
+}
+.form__search-icon--dark {
+  color: hsl(0deg, 0%, 100%);
 }
 .form__filter {
   min-width: 210px;
@@ -91,6 +119,11 @@ h3 {
      -moz-appearance: none;
           appearance: none;
   border: none;
+  transition: background-color 0.5s, color 0.5s ease;
+}
+.form__filter--dark {
+  background-color: hsl(209deg, 23%, 22%);
+  color: hsl(0deg, 0%, 100%);
 }
 .form__filter:active {
   border: none;
@@ -120,6 +153,11 @@ h3 {
   max-width: 260px;
   background-color: #ffffff;
   border-radius: 10px;
+  transition: background-color 0.5s, color 0.5s ease;
+}
+.card--dark {
+  background-color: hsl(209deg, 23%, 22%);
+  color: hsl(0deg, 0%, 100%);
 }
 .card__flag-container {
   width: 100%;
@@ -155,8 +193,12 @@ h3 {
   background-color: hsl(0deg, 0%, 95%);
   z-index: 2;
   padding-top: 7rem;
-  transition: margin 1s ease;
   margin-left: -100%;
+  transition: margin 1s, background-color 0.5s, color 0.5s ease;
+}
+.detail-card--dark {
+  background-color: hsl(207deg, 26%, 17%);
+  color: hsl(0deg, 0%, 100%);
 }
 .detail-card.show {
   margin-left: 0;
@@ -182,6 +224,12 @@ h3 {
   border: none;
   background-color: #ffffff;
   box-shadow: 2px 2px 5px 2px rgb(145, 145, 145);
+  transition: background-color 0.5s, color 0.5s, box-shadow 0.2s ease;
+}
+.detail-card__back-btn--dark {
+  background-color: hsl(209deg, 23%, 22%);
+  color: hsl(0deg, 0%, 100%);
+  box-shadow: none;
 }
 .detail-card__back-btn > i {
   font-size: 1.1rem;
@@ -205,6 +253,11 @@ h3 {
   box-shadow: 2px 2px 3px 3px hsl(0deg, 0%, 70%);
   width: 10rem;
   border-radius: 5px;
+  transition: background-color 0.5s, color 0.5s, box-shadow 0.2s ease;
+}
+.detail-card__less-item--dark {
+  background-color: hsl(209deg, 23%, 22%);
+  box-shadow: none;
 }
 
 @media screen and (min-width: 700px) {
@@ -220,6 +273,42 @@ h3 {
 @media screen and (min-width: 1023px) {
   .cards-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .detail-card {
+    display: grid;
+    grid-template-columns: 45% 50%;
+    padding: 7rem 2rem;
+    gap: 2rem;
+  }
+  .detail-card__hero-img, .detail-card__about, .detail-card__btn-container {
+    width: 95%;
+    height: 100%;
+    margin: 0;
+  }
+  .detail-card__img-container, .detail-card__img {
+    max-width: 100%;
+    height: 100%;
+  }
+  .detail-card__about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: -webkit-min-content;
+    grid-auto-rows: min-content;
+    gap: 15px 15px;
+    margin: 0;
+  }
+  .detail-card__title, .detail-card__btn-container, .detail-card__less-info {
+    grid-column: 1/3;
+  }
+  .detail-card__top-info, .detail-card__mid-info, .detail-card__less-info {
+    margin: 0;
+  }
+  .detail-card__less-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .detail-card__less-item {
+    width: 8rem;
   }
 }
 @media screen and (min-width: 1430px) {

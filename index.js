@@ -7,6 +7,8 @@ const backBtn = document.querySelector(`.detail-card__back-btn`)
 const borderBox = document.querySelector(`.detail-card__less-container`);
 
 
+let darkMode = false;
+
 let all;
 const eventListenerFnstore = {
     getAll() {
@@ -84,7 +86,10 @@ function createCard(details) {
 
     someDetails.forEach((detail) => {
         let div = document.createElement(`div`);
-        div.classList.add(`card`)
+        div.classList.add(`card`);
+        if (darkMode === true) {
+            div.classList.add(`card--dark`)
+        }
         div.innerHTML = `<div class="card__flag-container">
                         <img class="card__flag-img" src="${detail.flags.png}" alt="${detail.name.official}">
                         </div>
@@ -137,7 +142,7 @@ function loadedDetailCard(detail) {
     detailCardTitle.innerHTML = detail.name.common;
     detailCardName.innerHTML = names.length > 1 ? names.join(`, `) : names.length === 1 ? names[0] : '';
     detailCardTld.innerHTML = detail.tld.length > 1 ? detail.tld.join(`, `) : detail.tld.length === 1 ? detail.tld[0] : '';
-    detailCardPopulation.innerHTML = detail.population;
+    detailCardPopulation.innerHTML = detail.population.toLocaleString();
     detailCardRegion.innerHTML = detail.region;
     detailCardSubRegion.innerHTML = detail.subregion;
     detailCardCapital.innerHTML = detail.capital[0]
@@ -147,19 +152,14 @@ function loadedDetailCard(detail) {
 
     //Setting border countries
     //let borderCountries = helperFnStore.getBorderQuery(details, detail.borders);
+    borderBox.innerHTML = ``;
     let borderCountries = helperFnStore.getBorderQuery(all, detail.borders);
     borderCountries.forEach(country => {
         helperFnStore.borderCountries(country, borderBox)
     })
 
 }
-function c(i, body) {
-    let div = document.createElement(`div`);
-    div.classList.add(`detail-card__less-item`);
-    div.innerHTML = `<p>${i.name.common}</p>`;
-    body.appendChild(div)
 
-}
 const helperFnStore = {
     valuesFromObj(obj, key) {
         let arrValues = [];
@@ -179,11 +179,77 @@ const helperFnStore = {
         return result
     },
     borderCountries(i, body) {
+
         let div = document.createElement(`div`);
         div.classList.add(`detail-card__less-item`);
+        if (darkMode === true) {
+            div.classList.add(`detail-card__less-item--dark`);
+        }
         if (i && i.name) {
             div.innerHTML = `<p>${i?.name?.common}</p>`;
         }
         body.appendChild(div)
+    }
+}
+
+
+const darkModeBtn = document.querySelector(`.header__feature`);
+
+darkModeBtn.addEventListener(`click`, (e) => {
+    darkMode = darkMode ? false : true;
+    enableDarkMode(darkMode);
+    disableDarkMode(darkMode);
+
+})
+
+
+function enableDarkMode(check) {
+    if (!check) {
+        return;
+    }
+    let body = document.querySelector(`.body`);
+    let header = document.querySelector(`.header`);
+    let searchIcon = document.querySelector(`.form__search-icon`);
+    let search = document.querySelector(`.form__search`);
+    let filter = document.querySelector(`.form__filter`);
+    let cards = document.querySelectorAll(`.card`);
+    let detailCard = document.querySelector(`.detail-card`);
+    let detailCardBorders = detailCard.querySelectorAll(`.detail-card__less-item`)
+    let detailCardBtn = detailCard.querySelector(`.detail-card__back-btn`);
+    if (check === true) {
+        body.classList.add("body--dark");
+        header.classList.add("header--dark");
+        searchIcon.classList.add("form__search-icon--dark");
+        search.classList.add("form__search--dark");
+        filter.classList.add("form__filter--dark");
+        cards?.forEach(card => card?.classList?.add?.(`card--dark`));
+        detailCard.classList.add("detail-card--dark")
+        detailCardBorders.forEach(border => border?.classList?.add("detail-card__less-item--dark"))
+        detailCardBtn.classList.add("detail-card__back-btn--dark")
+    }
+}
+function disableDarkMode(check) {
+    if (check) {
+        return;
+    }
+    let body = document.querySelector(`.body`);
+    let header = document.querySelector(`.header`);
+    let searchIcon = document.querySelector(`.form__search-icon`);
+    let search = document.querySelector(`.form__search`);
+    let filter = document.querySelector(`.form__filter`);
+    let cards = document.querySelectorAll(`.card`);
+    let detailCard = document.querySelector(`.detail-card`);
+    let detailCardBorders = detailCard.querySelectorAll(`.detail-card__less-item`)
+    let detailCardBtn = detailCard.querySelector(`.detail-card__back-btn`);
+    if (check !== true) {
+        body.classList.remove("body--dark");
+        header.classList.remove("header--dark");
+        searchIcon.classList.remove("form__search-icon--dark");
+        search.classList.remove("form__search--dark");
+        filter.classList.remove("form__filter--dark");
+        cards?.forEach(card => card?.classList?.remove?.(`card--dark`));
+        detailCard.classList.remove("detail-card--dark")
+        detailCardBorders.forEach(border => border?.classList?.remove("detail-card__less-item--dark"))
+        detailCardBtn.classList.remove("detail-card__back-btn--dark")
     }
 }
