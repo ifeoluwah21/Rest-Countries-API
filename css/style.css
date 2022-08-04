@@ -68,9 +68,15 @@ h3 {
   width: 100%;
   max-width: 395px;
 }
-.formfilter-container {
+.form__filter-container {
   width: 100%;
   max-width: 210px;
+}
+.form input.form__search--dark:focus,
+.form input.form__search--dark:active,
+.form input.form__search--dark:visited {
+  background-color: hsl(209deg, 23%, 22%);
+  color: hsl(0deg, 0%, 100%);
 }
 .form__search {
   width: 100%;
@@ -90,13 +96,8 @@ h3 {
   background-color: hsl(209deg, 23%, 22%);
   color: hsl(0deg, 0%, 100%);
 }
-.form__search--dark::-moz-placeholder {
-  color: hsl(0deg, 0%, 100%);
-}
-.form__search--dark:-ms-input-placeholder {
-  color: hsl(0deg, 0%, 100%);
-}
-.form__search--dark::placeholder {
+.form__search--darkinput[type=text] {
+  background-color: hsl(209deg, 23%, 22%);
   color: hsl(0deg, 0%, 100%);
 }
 .form__search-icon {
